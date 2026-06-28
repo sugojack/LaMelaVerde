@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Mela Verde – Gelateria Artigianale</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:#FDFAF5;color:#1A3D2B;overflow-x:hidden}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1.2rem 3rem;background:rgba(26,61,43,0.96);backdrop-filter:blur(8px)}
+.nav-logo{font-family:'Playfair Display',serif;font-size:1.3rem;color:#F7F2E8;letter-spacing:0.02em}
+.nav-logo span{color:#8DB87A}
+.nav-links{display:flex;gap:2rem}
+.nav-links a{color:#F7F2E8;text-decoration:none;font-size:0.88rem;font-weight:300;letter-spacing:0.05em;opacity:0.85;transition:opacity 0.2s}
+.nav-links a:hover{opacity:1}
+.nav-cta{background:#8DB87A;color:#1A3D2B;padding:0.5rem 1.3rem;border-radius:2rem;font-size:0.85rem;font-weight:500;text-decoration:none;transition:background 0.2s}
+.nav-cta:hover{background:#7aaa67}
+
+/* HERO */
+.hero{min-height:100vh;background:#1A3D2B;display:flex;align-items:center;position:relative;overflow:hidden;padding-top:80px}
+.hero-bg-circles{position:absolute;inset:0;pointer-events:none}
+.circle{position:absolute;border-radius:50%;opacity:0.06}
+.c1{width:600px;height:600px;background:#8DB87A;top:-100px;right:-150px}
+.c2{width:350px;height:350px;background:#C8922A;bottom:-50px;left:-80px}
+.c3{width:200px;height:200px;background:#F7F2E8;top:40%;left:30%}
+.hero-content{position:relative;z-index:2;max-width:680px;padding:0 3rem}
+.hero-eyebrow{font-size:0.78rem;font-weight:500;letter-spacing:0.2em;color:#8DB87A;text-transform:uppercase;margin-bottom:1.5rem}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(3rem,6vw,5.5rem);color:#F7F2E8;line-height:1.08;margin-bottom:1.5rem}
+.hero-title em{color:#8DB87A;font-style:italic}
+.hero-sub{color:#a8c5a0;font-size:1.05rem;font-weight:300;line-height:1.7;max-width:480px;margin-bottom:2.5rem}
+.hero-actions{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+.btn-primary{background:#8DB87A;color:#1A3D2B;padding:0.85rem 2rem;border-radius:2rem;font-size:0.95rem;font-weight:500;text-decoration:none;transition:all 0.2s;display:inline-block}
+.btn-primary:hover{background:#7aaa67;transform:translateY(-1px)}
+.btn-ghost{color:#F7F2E8;font-size:0.9rem;text-decoration:none;display:flex;align-items:center;gap:0.4rem;opacity:0.75;transition:opacity 0.2s}
+.btn-ghost:hover{opacity:1}
+.hero-scoop{position:absolute;right:0;top:50%;transform:translateY(-50%);width:42vw;max-width:520px;opacity:0.9}
+.hero-badge{position:absolute;bottom:3rem;right:3rem;background:rgba(247,242,232,0.1);border:1px solid rgba(247,242,232,0.15);border-radius:1rem;padding:1rem 1.5rem;text-align:center;backdrop-filter:blur(4px)}
+.badge-num{font-family:'Playfair Display',serif;font-size:2.5rem;color:#F7F2E8;line-height:1}
+.badge-stars{color:#C8922A;font-size:1rem;letter-spacing:0.1em;margin:0.2rem 0}
+.badge-label{font-size:0.75rem;color:#a8c5a0;letter-spacing:0.08em}
+
+/* STRIP */
+.strip{background:#C8922A;padding:0.85rem 3rem;display:flex;gap:3rem;justify-content:center;align-items:center;flex-wrap:wrap}
+.strip-item{color:#1A3D2B;font-size:0.82rem;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;display:flex;align-items:center;gap:0.5rem}
+.strip-dot{width:5px;height:5px;background:#1A3D2B;border-radius:50%;opacity:0.4}
+
+/* SECTIONS */
+section{padding:6rem 3rem}
+.section-eyebrow{font-size:0.75rem;font-weight:500;letter-spacing:0.2em;color:#8DB87A;text-transform:uppercase;margin-bottom:1rem}
+.section-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3.2rem);color:#1A3D2B;line-height:1.15;margin-bottom:1.5rem}
+.section-title em{font-style:italic;color:#C8922A}
+.section-body{font-size:1rem;font-weight:300;line-height:1.8;color:#3d6050;max-width:520px}
+
+/* FLAVORS */
+.flavors-section{background:#FDFAF5}
+.flavors-header{text-align:center;margin-bottom:4rem}
+.flavors-header .section-body{margin:0 auto}
+.flavors-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.5rem;max-width:1000px;margin:0 auto}
+.flavor-card{border-radius:1.5rem;padding:2rem 1.5rem;cursor:pointer;transition:transform 0.25s,box-shadow 0.25s;position:relative;overflow:hidden}
+.flavor-card:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(26,61,43,0.12)}
+.fc-pistachio{background:#d4ebbc}
+.fc-cioccolato{background:#3d2010;color:#f5e6d3}
+.fc-fragola{background:#fcd4d4}
+.fc-limone{background:#fdf3c8}
+.fc-caffe{background:#2c1810;color:#f5e0c8}
+.fc-mela{background:#c8f0d4}
+.flavor-icon{font-size:2.8rem;margin-bottom:1rem;display:block}
+.flavor-name{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;margin-bottom:0.3rem}
+.fc-cioccolato .flavor-name,.fc-caffe .flavor-name{color:#f5d9b8}
+.flavor-desc{font-size:0.82rem;font-weight:300;opacity:0.75;line-height:1.5}
+.fc-cioccolato .flavor-desc,.fc-caffe .flavor-desc{color:#e8ccaa;opacity:0.9}
+.flavor-dot{position:absolute;bottom:-20px;right:-20px;width:80px;height:80px;border-radius:50%;opacity:0.12}
+.fc-pistachio .flavor-dot{background:#1A3D2B}
+.fc-cioccolato .flavor-dot{background:#fff}
+.fc-fragola .flavor-dot{background:#c0392b}
+.fc-limone .flavor-dot{background:#C8922A}
+.fc-caffe .flavor-dot{background:#fff}
+.fc-mela .flavor-dot{background:#1A3D2B}
+
+/* STORY */
+.story-section{background:#1A3D2B;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;max-width:1100px;margin:0 auto}
+.story-section-wrap{background:#1A3D2B}
+.story-img{border-radius:2rem;overflow:hidden;position:relative}
+.story-img-inner{background:#2d5c3e;border-radius:2rem;height:420px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.story-gelato-art{font-size:9rem;opacity:0.6;filter:saturate(0.7)}
+.story-accent-box{position:absolute;bottom:1.5rem;left:1.5rem;background:rgba(200,146,42,0.15);border:1px solid rgba(200,146,42,0.3);border-radius:1rem;padding:1rem 1.5rem}
+.story-accent-year{font-family:'Playfair Display',serif;font-size:2rem;color:#C8922A}
+.story-accent-label{font-size:0.75rem;color:#8DB87A;letter-spacing:0.1em}
+.story-text .section-title{color:#F7F2E8}
+.story-text .section-body{color:#a8c5a0;max-width:100%}
+.story-stat-row{display:flex;gap:2rem;margin-top:2.5rem}
+.story-stat{border-left:2px solid #8DB87A;padding-left:1rem}
+.story-stat-num{font-family:'Playfair Display',serif;font-size:2rem;color:#C8922A}
+.story-stat-label{font-size:0.8rem;color:#8DB87A;margin-top:0.2rem}
+
+/* REVIEWS */
+.reviews-section{background:#F7F2E8}
+.reviews-header{text-align:center;margin-bottom:3.5rem}
+.reviews-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;max-width:1000px;margin:0 auto}
+.review-card{background:#FDFAF5;border-radius:1.25rem;padding:1.75rem;border:1px solid rgba(26,61,43,0.07)}
+.review-stars{color:#C8922A;font-size:1rem;letter-spacing:0.05em;margin-bottom:1rem}
+.review-text{font-size:0.9rem;font-weight:300;line-height:1.7;color:#3d6050;margin-bottom:1.25rem;font-style:italic}
+.review-author{font-size:0.8rem;font-weight:500;color:#1A3D2B}
+.review-role{font-size:0.75rem;color:#8DB87A;margin-top:0.1rem}
+.reviews-cta{text-align:center;margin-top:3rem;font-size:0.9rem;color:#3d6050}
+.reviews-cta a{color:#1A3D2B;font-weight:500}
+
+/* MENU HIGHLIGHTS */
+.menu-section{background:#FDFAF5;text-align:center}
+.menu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.5rem;max-width:1000px;margin:3rem auto 0}
+.menu-item{background:#1A3D2B;border-radius:1.5rem;padding:2rem 1.5rem;position:relative;overflow:hidden}
+.menu-item-label{font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:#8DB87A;margin-bottom:0.5rem}
+.menu-item-name{font-family:'Playfair Display',serif;font-size:1.35rem;color:#F7F2E8;margin-bottom:0.5rem}
+.menu-item-desc{font-size:0.82rem;font-weight:300;color:#a8c5a0;line-height:1.5}
+.menu-item-circle{position:absolute;top:-30px;right:-30px;width:100px;height:100px;border-radius:50%;background:rgba(141,184,122,0.1)}
+
+/* LOCATION */
+.location-section{background:#1A3D2B;text-align:center}
+.location-section .section-title{color:#F7F2E8;margin:0 auto 0.5rem}
+.location-section .section-body{color:#a8c5a0;margin:0 auto 3rem}
+.location-card{background:rgba(247,242,232,0.06);border:1px solid rgba(247,242,232,0.12);border-radius:1.5rem;padding:2.5rem;max-width:600px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:2rem}
+.loc-item{text-align:left}
+.loc-icon{font-size:1.5rem;margin-bottom:0.75rem}
+.loc-label{font-size:0.72rem;letter-spacing:0.15em;text-transform:uppercase;color:#8DB87A;margin-bottom:0.4rem}
+.loc-value{font-size:0.95rem;color:#F7F2E8;font-weight:300;line-height:1.5}
+.location-actions{display:flex;gap:1rem;justify-content:center;margin-top:2.5rem;flex-wrap:wrap}
+.btn-outline{border:1px solid rgba(247,242,232,0.3);color:#F7F2E8;padding:0.8rem 1.8rem;border-radius:2rem;font-size:0.9rem;text-decoration:none;transition:all 0.2s;display:inline-block}
+.btn-outline:hover{background:rgba(247,242,232,0.08);border-color:rgba(247,242,232,0.5)}
+
+/* FOOTER */
+footer{background:#0f2a1d;padding:2.5rem 3rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-logo{font-family:'Playfair Display',serif;font-size:1.1rem;color:#F7F2E8}
+.footer-logo span{color:#8DB87A}
+.footer-copy{font-size:0.78rem;color:#4a7a5e}
+.footer-contact{font-size:0.82rem;color:#8DB87A}
+
+@media(max-width:768px){
+nav{padding:1rem 1.5rem}
+.nav-links{display:none}
+.hero-content{padding:0 1.5rem}
+.hero-scoop{opacity:0.15}
+.hero-badge{display:none}
+section{padding:4rem 1.5rem}
+.story-section{grid-template-columns:1fr}
+.location-card{grid-template-columns:1fr}
+footer{flex-direction:column;text-align:center;padding:2rem 1.5rem}
+.strip{gap:1.5rem;padding:0.85rem 1.5rem;justify-content:flex-start;overflow-x:auto}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">La Mela <span>Verde</span></div>
+  <div class="nav-links">
+    <a href="#flavori">Gusti</a>
+    <a href="#storia">Chi siamo</a>
+    <a href="#menu">Menu</a>
+    <a href="#dove">Dove siamo</a>
+  </div>
+  <a href="tel:3519131603" class="nav-cta">📞 Chiama</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg-circles">
+    <div class="circle c1"></div>
+    <div class="circle c2"></div>
+    <div class="circle c3"></div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Gelateria Artigianale · Venezia</div>
+    <h1 class="hero-title">Il gelato<br>che sa di <em>vero</em></h1>
+    <p class="hero-sub">Ingredienti naturali, ricette artigianali e una passione autentica per il gusto. Ogni giorno, a Venezia Mestre.</p>
+    <div class="hero-actions">
+      <a href="#flavori" class="btn-primary">Scopri i nostri gusti</a>
+      <a href="#dove" class="btn-ghost">📍 Via Castellana, 105/E →</a>
+    </div>
+  </div>
+
+  <div class="hero-scoop" aria-hidden="true">
+    <svg viewBox="0 0 400 560" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="200" cy="430" rx="80" ry="20" fill="rgba(247,242,232,0.08)"/>
+      <rect x="172" y="300" width="56" height="160" rx="28" fill="#C8922A" opacity="0.85"/>
+      <rect x="180" y="290" width="40" height="30" rx="8" fill="#b07c22" opacity="0.7"/>
+      <ellipse cx="200" cy="295" rx="90" ry="88" fill="#8DB87A"/>
+      <ellipse cx="200" cy="280" rx="65" ry="62" fill="#9dc98a"/>
+      <ellipse cx="178" cy="268" rx="18" ry="16" fill="rgba(255,255,255,0.15)"/>
+      <ellipse cx="140" cy="230" rx="70" ry="68" fill="#3d2010"/>
+      <ellipse cx="140" cy="217" rx="50" ry="48" fill="#5a3018"/>
+      <ellipse cx="128" cy="206" rx="15" ry="13" fill="rgba(255,255,255,0.08)"/>
+      <ellipse cx="255" cy="220" rx="75" ry="72" fill="#fdf3c8"/>
+      <ellipse cx="255" cy="207" rx="55" ry="52" fill="#fef7d8"/>
+      <ellipse cx="242" cy="196" rx="16" ry="14" fill="rgba(255,255,255,0.4)"/>
+      <path d="M195 380 Q200 370 205 385 Q208 395 200 400 Q192 395 195 380Z" fill="rgba(200,146,42,0.4)"/>
+    </svg>
+  </div>
+
+  <div class="hero-badge">
+    <div class="badge-num">4.5</div>
+    <div class="badge-stars">★★★★½</div>
+    <div class="badge-label">575 recensioni Google</div>
+  </div>
+</section>
+
+<div class="strip">
+  <div class="strip-item">🌿 Ingredienti naturali</div>
+  <div class="strip-dot"></div>
+  <div class="strip-item">🌾 Opzioni senza glutine</div>
+  <div class="strip-dot"></div>
+  <div class="strip-item">🌱 Gusti vegani</div>
+  <div class="strip-dot"></div>
+  <div class="strip-item">☕ Bar e pasticceria</div>
+  <div class="strip-dot"></div>
+  <div class="strip-item">🎂 Torte personalizzate</div>
+</div>
+
+<section class="flavors-section" id="flavori">
+  <div class="flavors-header">
+    <div class="section-eyebrow">I nostri gusti</div>
+    <h2 class="section-title">Artigianale, <em>come una volta</em></h2>
+    <p class="section-body">Ogni gusto è preparato con cura, usando materie prime selezionate. Dal classico pistacchio alla nostra firma: la mela verde.</p>
+  </div>
+  <div class="flavors-grid">
+    <div class="flavor-card fc-pistachio">
+      <span class="flavor-icon">🟢</span>
+      <div class="flavor-name">Pistacchio</div>
+      <div class="flavor-desc">Pistacchio di Bronte DOP, cremoso e intenso</div>
+      <div class="flavor-dot"></div>
+    </div>
+    <div class="flavor-card fc-cioccolato">
+      <span class="flavor-icon">🍫</span>
+      <div class="flavor-name">3 Cioccolati</div>
+      <div class="flavor-desc">Fondente, al latte e bianco in un'unica torta</div>
+      <div class="flavor-dot"></div>
+    </div>
+    <div class="flavor-card fc-fragola">
+      <span class="flavor-icon">🍓</span>
+      <div class="flavor-name">Fragola</div>
+      <div class="flavor-desc">Fragole fresche di stagione, senza coloranti</div>
+      <div class="flavor-dot"></div>
+    </div>
+    <div class="flavor-card fc-limone">
+      <span class="flavor-icon">🍋</span>
+      <div class="flavor-name">Limone</div>
+      <div class="flavor-desc">Agrumato e rinfrescante, vegan e senza lattosio</div>
+      <div class="flavor-dot"></div>
+    </div>
+    <div class="flavor-card fc-caffe">
+      <span class="flavor-icon">☕</span>
+      <div class="flavor-name">Caffè</div>
+      <div class="flavor-desc">Espresso napoletano intenso, per i veri intenditori</div>
+      <div class="flavor-dot"></div>
+    </div>
+    <div class="flavor-card fc-mela">
+      <span class="flavor-icon">🍏</span>
+      <div class="flavor-name">Mela Verde</div>
+      <div class="flavor-desc">Il nostro gusto signature. Fresco, unico, inconfondibile</div>
+      <div class="flavor-dot"></div>
+    </div>
+  </div>
+</section>
+
+<div class="story-section-wrap">
+<div class="story-section" id="storia" style="padding:6rem 3rem">
+  <div class="story-img">
+    <div class="story-img-inner">
+      <div class="story-gelato-art">🍨</div>
+      <div class="story-accent-box">
+        <div class="story-accent-year">2022</div>
+        <div class="story-accent-label">Nuova apertura</div>
+      </div>
+    </div>
+  </div>
+  <div class="story-text">
+    <div class="section-eyebrow">La nostra storia</div>
+    <h2 class="section-title" style="color:#F7F2E8">Dalla tradizione<br><em>napoletana</em> a Venezia</h2>
+    <p class="section-body">Il proprietario ha portato nella laguna la vera anima delle specialità del sud: gelati artigianali preparati con prodotti naturali, pasticceria di qualità e un servizio caldo come il sole campano.<br><br>Qui puoi fare colazione, un apericena tra amici o semplicemente fermarti per un gelato fatto come una volta. Susanna, Paola, Giuseppe e Davide ti aspettano ogni giorno.</p>
+    <div class="story-stat-row">
+      <div class="story-stat">
+        <div class="story-stat-num">575+</div>
+        <div class="story-stat-label">Recensioni Google</div>
+      </div>
+      <div class="story-stat">
+        <div class="story-stat-num">4.5★</div>
+        <div class="story-stat-label">Valutazione media</div>
+      </div>
+      <div class="story-stat">
+        <div class="story-stat-num">100%</div>
+        <div class="story-stat-label">Ingredienti naturali</div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<section class="menu-section" id="menu">
+  <div class="section-eyebrow">Specialità</div>
+  <h2 class="section-title">Molto più di <em>un gelato</em></h2>
+  <p class="section-body" style="margin:0 auto">Bar, pasticceria, torte e stuzzichini. Un posto dove tornare sempre.</p>
+  <div class="menu-grid">
+    <div class="menu-item">
+      <div class="menu-item-label">Signature</div>
+      <div class="menu-item-name">Torta ai 3 Cioccolati</div>
+      <div class="menu-item-desc">Il nostro dolce più amato. Tre strati di cioccolato fondente, al latte e bianco</div>
+      <div class="menu-item-circle"></div>
+    </div>
+    <div class="menu-item">
+      <div class="menu-item-label">Stagionale</div>
+      <div class="menu-item-name">Colomba Farcita</div>
+      <div class="menu-item-desc">Colomba artigianale farcita con creme pregiate. Preparata da Paola con amore</div>
+      <div class="menu-item-circle"></div>
+    </div>
+    <div class="menu-item">
+      <div class="menu-item-label">Bar</div>
+      <div class="menu-item-name">Caffè & Brioche</div>
+      <div class="menu-item-desc">Colazione alla napoletana. Aperto dal lunedì, dalle 7:30 del mattino</div>
+      <div class="menu-item-circle"></div>
+    </div>
+    <div class="menu-item">
+      <div class="menu-item-label">Evento</div>
+      <div class="menu-item-name">Apericena Privato</div>
+      <div class="menu-item-desc">Organizza il tuo compleanno o evento con snack e dolci su misura dallo staff</div>
+      <div class="menu-item-circle"></div>
+    </div>
+  </div>
+</section>
+
+<section class="reviews-section" id="recensioni">
+  <div class="reviews-header">
+    <div class="section-eyebrow">Recensioni</div>
+    <h2 class="section-title">Cosa dicono <em>i clienti</em></h2>
+  </div>
+  <div class="reviews-grid">
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"Ho fatto un apericena qui per festeggiare il mio compleanno e lo consiglio vivamente. Ottimo cibo, ottima locazione, ottimo personale. Grazie mille a tutto lo staff!"</p>
+      <div class="review-author">Cliente verificata</div>
+      <div class="review-role">Evento privato · 2 anni fa</div>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"Gelato molto buono, ma la panna fatta a mano è superlativa! Attenti alle allergie, con opzioni per celiaci e vegani. Lo rifarei senza esitare."</p>
+      <div class="review-author">Andrea Davanzo</div>
+      <div class="review-role">Local Guide · 97 recensioni</div>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"Gelati super per bontà e quantità, con prodotti naturali. Personale gentilissimo. Da quando hanno riaperto con la nuova location, ancora meglio di prima!"</p>
+      <div class="review-author">Antonella Avagliano</div>
+      <div class="review-role">Local Guide · 76 recensioni</div>
+    </div>
+  </div>
+  <p class="reviews-cta">Leggi tutte le 575 recensioni su <a href="https://maps.google.com" target="_blank">Google Maps</a></p>
+</section>
+
+<section class="location-section" id="dove">
+  <div class="section-eyebrow">Dove siamo</div>
+  <h2 class="section-title">Vieni a trovarci</h2>
+  <p class="section-body">A pochi minuti dal centro di Mestre. Ti aspettiamo per un gelato, un caffè o una dolce pausa.</p>
+  <div class="location-card">
+    <div class="loc-item">
+      <div class="loc-icon">📍</div>
+      <div class="loc-label">Indirizzo</div>
+      <div class="loc-value">Via Castellana, 105/E<br>30174 Venezia (VE)</div>
+    </div>
+    <div class="loc-item">
+      <div class="loc-icon">🕐</div>
+      <div class="loc-label">Orari</div>
+      <div class="loc-value">Lun–Dom<br>dalle 07:30</div>
+    </div>
+    <div class="loc-item">
+      <div class="loc-icon">📞</div>
+      <div class="loc-label">Telefono</div>
+      <div class="loc-value">351 913 1603</div>
+    </div>
+    <div class="loc-item">
+      <div class="loc-icon">🛵</div>
+      <div class="loc-label">Servizi</div>
+      <div class="loc-value">Consumazione in loco<br>Asporto · Consegna</div>
+    </div>
+  </div>
+  <div class="location-actions">
+    <a href="https://maps.google.com/?q=Via+Castellana+105E+Venezia" target="_blank" class="btn-primary">Apri su Google Maps</a>
+    <a href="tel:3519131603" class="btn-outline">Chiama ora</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">La Mela <span>Verde</span></div>
+  <div class="footer-copy">© 2024 Gelateria Artigianale La Mela Verde – Venezia</div>
+  <div class="footer-contact">351 913 1603</div>
+</footer>
+
+</body>
+</html>
